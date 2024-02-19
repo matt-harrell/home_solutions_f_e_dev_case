@@ -124,7 +124,7 @@ describe("Partner component", () => {
 
   // Test for read more button would go here
   it("displays the get see more button", () => {
-    const readMoreButton = screen.getByRole("button", { name: /see more/i });
+    const readMoreButton = screen.getByRole("button", { name: 'see more button' });
     expect(readMoreButton).toBeInTheDocument();
   });
 });

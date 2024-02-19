@@ -1,12 +1,14 @@
 import Image from "next/image";
 import { Provider } from "../../../interfaces";
 import { MapPinIcon,FireIcon, CheckIcon,ChevronDownIcon } from "@heroicons/react/20/solid";
+import HalfStarIcon from "../StarRating/HalfStarIcon";
+import StarRating from "../StarRating/StarRating";
 interface props {
   partner: Provider;
 }
 
 const Partner = ({ partner }: props) => {
-  const { distance, review_count, slug, name, website, address, services } =
+  const { distance, review_count, review_score, slug, name, website, address, services } =
     partner;
   const isPartnerNearby =
     distance < 5 ? (
@@ -17,7 +19,7 @@ const Partner = ({ partner }: props) => {
       ""
     );
   const isPartnerPopular =
-    review_count > 99 ? (
+  review_count > 99 ? (
       <div className="flex">
         <FireIcon className="w-5 h-5 mr-1 text-green-800"/>popular
       </div>
@@ -40,6 +42,7 @@ const Partner = ({ partner }: props) => {
       </div>
       <h2 className="font-bold text-gray-800 text-xl">{name}</h2>
       <div className="flex flex-wrap mt-2">
+        <StarRating rating={review_score}/>
         <div className="mx-2 md:block hidden">|</div>
         <p>{address}</p>
       </div>
@@ -49,7 +52,7 @@ const Partner = ({ partner }: props) => {
       </div>
       <div className="mb-10">
         <h3 className="uppercase font-extrabold text-gray-500 my-5">SERVICES OFFERED</h3>
-        <div className="font-serif flex flex-wrap gap-x-5 md:gap-y-4 gap-y-2">
+        <div className="font-serif md:flex flex-wrap gap-x-5 md:gap-y-4 gap-y-2">
         {services.map((service, index) => (
           <div key={index} className="flex">
             <CheckIcon className="w-5 h-5 text-green-500"/>
@@ -67,7 +70,7 @@ const Partner = ({ partner }: props) => {
       <p className="text-end font-serif">
         - Jane Doe.
       </p>
-      <button className="ml-auto flex my-5 uppercase font-extrabold text-gray-500 gap-x-1">
+      <button className="ml-auto flex my-5 uppercase font-extrabold text-gray-500 gap-x-1" aria-label="see more button">
         <div>See&nbsp;more</div>
         <ChevronDownIcon className="inline h-6 w-6 text-blue-500"/>
       </button>
