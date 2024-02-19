@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Provider } from "../../../interfaces";
-
+import { MapPinIcon,FireIcon, CheckIcon,ChevronDownIcon } from "@heroicons/react/20/solid";
 interface props {
   partner: Provider;
 }
@@ -10,47 +10,67 @@ const Partner = ({ partner }: props) => {
     partner;
   const isPartnerNearby =
     distance < 5 ? (
-      <div>
-        <i></i>Nearby
+      <div className="flex">
+        <MapPinIcon className="w-5 h-5 mr-1 text-green-800"/>Nearby
       </div>
     ) : (
       ""
     );
   const isPartnerPopular =
     review_count > 99 ? (
-      <div>
-        <i></i>popular
+      <div className="flex">
+        <FireIcon className="w-5 h-5 mr-1 text-green-800"/>popular
       </div>
     ) : (
       ""
     );
 
   return (
-    <section>
-      <Image
-        src={`https://d126ytvel6227q.cloudfront.net/logos/${slug}.jpg`}
-        width={500}
-        height={500}
-        alt={`${name} logo`}
-      />
-      <a href={website} target="_blank">
-        get quote
-      </a>
-      <h2>{name}</h2>
-      <p>{address}</p>
-      {isPartnerNearby}
-      {isPartnerPopular}
-      <article>
+    <section className="max-w-4xl mx-auto md:p-8 p-6 rounded-lg border">
+      <div className="flex flex-wrap md:justify-between justify-center items-center mb-3 gap-5">
+        <Image
+          src={`https://d126ytvel6227q.cloudfront.net/logos/${slug}.jpg`}
+          width={100}
+          height={100}
+          alt={`${name} logo`}
+        />
+        <a href={website} target="_blank" className="d-block bg-blue-600 hover:bg-blue-800 transition-colors ease-in duration-200 text-white font-bold px-10 py-2 capitalize">
+          get quote
+        </a>
+      </div>
+      <h2 className="font-bold text-gray-800 text-xl">{name}</h2>
+      <div className="flex flex-wrap mt-2">
+        <div className="mx-2 md:block hidden">|</div>
+        <p>{address}</p>
+      </div>
+      <div className="flex flex-wrap font-serif gap-2 mt-5 mb-8">
+        {isPartnerNearby}
+        {isPartnerPopular}
+      </div>
+      <div className="mb-10">
+        <h3 className="uppercase font-extrabold text-gray-500 my-5">SERVICES OFFERED</h3>
+        <div className="font-serif flex flex-wrap gap-x-5 md:gap-y-4 gap-y-2">
         {services.map((service, index) => (
-          <div key={index}>{service}</div>
+          <div key={index} className="flex">
+            <CheckIcon className="w-5 h-5 text-green-500"/>
+            {service}
+          </div>
         ))}
-      </article>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+        </div>
+      </div>
+      <h3 className="uppercase font-extrabold text-gray-500 my-5">SERVICES OFFERED</h3>
+      <p className="font-serif italic pl-5">
+        &#8220;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
         ultricies libero eu neque consequat, id vestibulum nulla sagittis. Morbi
-        auctor consectetur tellus eu blandit.
+        auctor consectetur tellus eu blandit.&#8221;
       </p>
-      <button>See more</button>
+      <p className="text-end font-serif">
+        - Jane Doe.
+      </p>
+      <button className="ml-auto flex my-5 uppercase font-extrabold text-gray-500 gap-x-1">
+        <div>See&nbsp;more</div>
+        <ChevronDownIcon className="inline h-6 w-6 text-blue-500"/>
+      </button>
     </section>
   );
 };

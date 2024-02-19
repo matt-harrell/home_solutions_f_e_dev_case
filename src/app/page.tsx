@@ -72,8 +72,10 @@ export default function Home() {
   
 
   return (
-    <main className="min-h-screen">
-      <Partner partner={partner}/>
+    <main className="container mx-auto min-h-screen md:p-8 p-4 ">
+      <div className="mx-auto d-flex flex-col">
+        <Partner partner={partner}/>
+      </div>
     </main>
   );
 }
