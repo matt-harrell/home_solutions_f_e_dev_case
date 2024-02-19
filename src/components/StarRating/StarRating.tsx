@@ -1,5 +1,6 @@
 import React from 'react';
 import { StarIcon } from "@heroicons/react/20/solid";
+import { StarIcon as StarOutlineIcon } from "@heroicons/react/24/outline";
 import HalfStarIcon from './HalfStarIcon';
 
 interface props{
@@ -18,6 +19,12 @@ const StarRating = ({ rating }:props) => {
     }
     if (hasHalfStar) {
       stars.push(<HalfStarIcon key="half" className='h-5 w-5' data-testid="half-star"/>);
+    }
+    const emptyStars = 5 - stars.length;
+    if(emptyStars > 0){
+      for (let i = 0; i < emptyStars; i++) {
+        stars.push(<StarOutlineIcon key={`empty-${i}`}  className='h-5 w-5 text-yellow-400' data-testid="empty-star"/>);
+      }
     }
     return stars;
   };

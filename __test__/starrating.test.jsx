@@ -15,6 +15,11 @@ describe("StarRating Component has 3.5 stars", () => {
     const halfStars = screen.getAllByTestId("half-star");
     expect(halfStars).toHaveLength(1);
   });
+
+  it("renders half star correctly", () => {
+    const emptyStars = screen.getAllByTestId("empty-star");
+    expect(emptyStars).toHaveLength(1);
+  });
 });
 
 describe("StarRating Component has 3.4 stars", () => {
@@ -30,5 +35,10 @@ describe("StarRating Component has 3.4 stars", () => {
   it("renders half star correctly", () => {
     const halfStars = screen.queryByTestId("half-star");
     expect(halfStars).toBeNull();
+  });
+
+  it("renders half star correctly", () => {
+    const emptyStars = screen.getAllByTestId("empty-star");
+    expect(emptyStars).toHaveLength(2);
   });
 });
