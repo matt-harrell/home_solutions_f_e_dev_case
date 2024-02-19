@@ -28,12 +28,12 @@ const Partner = ({ partner }: props) => {
     );
 
   return (
-    <section className="max-w-4xl mx-auto md:p-8 p-6 rounded-lg border">
+    <section className="max-w-4xl mx-auto md:p-8 p-6 rounded-lg border my-10">
       <div className="flex flex-wrap md:justify-between justify-center items-center mb-3 gap-5">
         <Image
           src={`https://d126ytvel6227q.cloudfront.net/logos/${slug}.jpg`}
-          width={100}
-          height={100}
+          width={150}
+          height={150}
           alt={`${name} logo`}
         />
         <a href={website} target="_blank" className="d-block bg-blue-600 hover:bg-blue-800 transition-colors ease-in duration-200 text-white font-bold px-10 py-2 capitalize">
