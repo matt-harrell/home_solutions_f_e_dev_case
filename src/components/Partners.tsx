@@ -8,8 +8,9 @@ import {
 import Partner from "./Partner/Partner";
 import LoadingAnimation from "./LoadingAnimation/LoadingAnimation";
 import StarFilter from "./StarFilter/StarFilter";
-import { filterProvidersByDistance, filterProvidersByReviewScore } from "@/utils/filterFuncions";
+import { filterProvidersByDistance, filterProvidersByReviewScore, filterProvidersByService } from "@/utils/filterFuncions";
 import DistanceFilter from "./DisanceFilter/DistanceFilter";
+import ServicesFilter from "./ServicesFilter/ServicesFilter";
 
 const GetPartners = () => {
   const state = usePartners();
@@ -39,6 +40,7 @@ const GetPartners = () => {
       });
       let filteredPartners = filterProvidersByReviewScore(state.Partners,state.starFilter);
       filteredPartners = filterProvidersByDistance(filteredPartners,state.distanceFilter);
+      filteredPartners = filterProvidersByService(filteredPartners,state.serviceFilter);
       //TODO cascade function for each filter
       dispatch({
         type:PARTNER_ACTIONS.SET_SORTED_PARTNERS,
@@ -46,7 +48,7 @@ const GetPartners = () => {
       })
     }
     filterParners();
-  },[state.starFilter, state.distanceFilter],)
+  },[state.starFilter, state.distanceFilter, state.serviceFilter],)
 
   let partnerList;
   if (state.SortedPartners.length > 0) {
@@ -59,6 +61,7 @@ const GetPartners = () => {
     <div className="mx-auto">
       <StarFilter/>
       <DistanceFilter/>
+      <ServicesFilter/>
       {state.loading && <LoadingAnimation />}
       {!state.loading && partnerList}
     </div>
