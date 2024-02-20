@@ -7,6 +7,8 @@ import {
 } from "./PartnerContext";
 import Partner from "./Partner/Partner";
 import LoadingAnimation from "./LoadingAnimation/LoadingAnimation";
+import StarFilter from "./StarFilter/StarFilter";
+import { filterProvidersByReviewScore } from "@/utils/filterFuncions";
 
 const GetPartners = () => {
   const state = usePartners();
@@ -28,8 +30,21 @@ const GetPartners = () => {
     fetchParners();
   }, [dispatch]);
 
+  useEffect(()=> {
+    const filterParners = () => {
+      let filteredPartners = filterProvidersByReviewScore(state.Partners,state.starFilter);
+      //TODO cascade function for each filter
+      dispatch({
+        type:PARTNER_ACTIONS.SET_SORTED_PARTNERS,
+        payload:filteredPartners
+      })
+    }
+    filterParners();
+  },[state.Partners, state.starFilter])
+
   return (
     <div className="mx-auto">
+      <StarFilter/>
       {state.loading && <LoadingAnimation />}
       {!state.loading &&
         state.SortedPartners.map((partner, index) => (
