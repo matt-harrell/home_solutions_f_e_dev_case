@@ -3,10 +3,16 @@ import { Dispatch, PropsWithChildren, createContext, useContext, useReducer } fr
 import { Provider } from '../../interfaces';
 
 interface initialStateType {
+  error:boolean;
+  loading:boolean;
+  SortedPartners:Provider[];
   Partners: Provider[];
 }
 
 const initialState = {
+  error:false,
+  loading:false,
+  SortedPartners:[],
   Partners: [],
 } as initialStateType;
 
@@ -31,12 +37,25 @@ export const PartnerProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
 export const PARTNER_ACTIONS = {
   GET_PARTNERS:'get partners',
+  SET_LOADING:'set loading'
 }
 
 function partnersReducer(state: initialStateType, action: { type: string; payload: any; }) {
   switch (action.type) {
     case PARTNER_ACTIONS.GET_PARTNERS: {
-      return { ...state, Partners: action.payload }
+      return { 
+        ...state, 
+        Partners: action.payload, 
+        SortedPartners: action.payload,
+        loading:false,
+        error:false, 
+      }
+    }
+    case PARTNER_ACTIONS.SET_LOADING: {
+      return {
+        ...state,
+        loading:action.payload,
+      }
     }
     default: {
       throw Error('Unknown action: ' + action.type);
