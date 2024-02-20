@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import StarFilterComp from './StarFilterComp';
-import { PARTNER_ACTIONS, usePartnerDispatch, usePartners } from '../PartnerContext';
+import { PARTNER_ACTIONS, usePartnerDispatch } from '../PartnerContext';
 
 const StarFilter: React.FC = () => {
   const dispatch = usePartnerDispatch();  
