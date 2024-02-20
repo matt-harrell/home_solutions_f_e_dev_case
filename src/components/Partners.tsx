@@ -32,7 +32,7 @@ const GetPartners = () => {
     <div className="mx-auto">
       {state.loading && <LoadingAnimation />}
       {!state.loading &&
-        state.Partners.map((partner, index) => (
+        state.SortedPartners.map((partner, index) => (
           <Partner key={index} partner={partner} />
         ))}
     </div>
