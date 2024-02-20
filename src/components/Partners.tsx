@@ -8,7 +8,8 @@ import {
 import Partner from "./Partner/Partner";
 import LoadingAnimation from "./LoadingAnimation/LoadingAnimation";
 import StarFilter from "./StarFilter/StarFilter";
-import { filterProvidersByReviewScore } from "@/utils/filterFuncions";
+import { filterProvidersByDistance, filterProvidersByReviewScore } from "@/utils/filterFuncions";
+import DistanceFilter from "./DisanceFilter/DistanceFilter";
 
 const GetPartners = () => {
   const state = usePartners();
@@ -32,7 +33,12 @@ const GetPartners = () => {
 
   useEffect(()=> {
     const filterParners = () => {
+      dispatch({
+        type: PARTNER_ACTIONS.SET_LOADING,
+        payload: true,
+      });
       let filteredPartners = filterProvidersByReviewScore(state.Partners,state.starFilter);
+      filteredPartners = filterProvidersByDistance(filteredPartners,state.distanceFilter);
       //TODO cascade function for each filter
       dispatch({
         type:PARTNER_ACTIONS.SET_SORTED_PARTNERS,
@@ -40,16 +46,21 @@ const GetPartners = () => {
       })
     }
     filterParners();
-  },[state.Partners, state.starFilter])
+  },[state.starFilter, state.distanceFilter],)
+
+  let partnerList;
+  if (state.SortedPartners.length > 0) {
+    partnerList = state.SortedPartners.map((partner, index) => <Partner key={index} partner={partner} />)
+  }else{
+    partnerList = <p className="text-center">No partners found. Please try adjusting your fitlers</p>
+  }
 
   return (
     <div className="mx-auto">
       <StarFilter/>
+      <DistanceFilter/>
       {state.loading && <LoadingAnimation />}
-      {!state.loading &&
-        state.SortedPartners.map((partner, index) => (
-          <Partner key={index} partner={partner} />
-        ))}
+      {!state.loading && partnerList}
     </div>
   );
 };

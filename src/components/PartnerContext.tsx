@@ -8,6 +8,7 @@ interface initialStateType {
   SortedPartners:Provider[];
   Partners: Provider[];
   starFilter:number;
+  distanceFilter:number;
 }
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
   SortedPartners:[],
   Partners: [],
   starFilter:0,
+  distanceFilter:0,
 } as initialStateType;
 
 export const PartnerContext = createContext<initialStateType>(null!);
@@ -42,6 +44,7 @@ export const PARTNER_ACTIONS = {
   SET_SORTED_PARTNERS:'set partners',
   SET_LOADING:'set loading',
   SET_STAR_FILTER:'set star filter',
+  SET_DISTANCE_FILTER:'set distance filter'
 }
 
 function partnersReducer(state: initialStateType, action: { type: string; payload: any; }) {
@@ -73,6 +76,12 @@ function partnersReducer(state: initialStateType, action: { type: string; payloa
       return { 
         ...state,  
         starFilter: action.payload,
+      }
+    }
+    case PARTNER_ACTIONS.SET_DISTANCE_FILTER: {
+      return { 
+        ...state,  
+        distanceFilter: action.payload,
       }
     }
     default: {
