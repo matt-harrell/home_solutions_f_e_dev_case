@@ -1,3 +1,4 @@
+"use client";
 import { Dispatch, PropsWithChildren, createContext, useContext, useReducer } from 'react';
 import { Provider } from '../../interfaces';
 

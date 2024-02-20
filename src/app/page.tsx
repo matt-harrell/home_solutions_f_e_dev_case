@@ -1,4 +1,3 @@
-"use client";
 import {
   PartnerProvider,
 } from "@/components/PartnerContext";
