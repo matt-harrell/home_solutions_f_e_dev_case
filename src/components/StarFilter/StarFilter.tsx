@@ -16,9 +16,7 @@ const StarFilter: React.FC = () => {
   };
 
   return (
-    <div>
       <StarFilterComp starValue={starValue} handleChange={handleChange} />
-    </div>
   );
 };
 
